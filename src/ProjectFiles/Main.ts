@@ -1,16 +1,16 @@
 export const Main = (loadTemplates, assignEngine, container) => {
-    return `import * as spa from 'spa';
+    return `import * as fuspa from 'fuspa';
 
-spa.Route.options = {
+// Load engine specific templates
+${loadTemplates}
+
+fuspa.Route.options = {
     container: '${container}',
     templateEngine: ${assignEngine}
 };
 
-const routeMapper = spa.RouteMapper.instance;
-const route = spa.Route.instance;
-
-// Load engine specific templates
-${loadTemplates}
+const routeMapper = fuspa.RouteMapper.instance;
+const route = fuspa.Route.instance;
 
 routeMapper.addRoute('/', () => {
     route.title='Home';
