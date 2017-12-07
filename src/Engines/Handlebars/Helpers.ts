@@ -6,6 +6,8 @@ export const Helpers = `
 
 import * as moment from 'moment';
 
+const defaultDateFormat = 'YYYY-MM-DD';
+
 export = function (Handlebars) {
 let globalVariables = {};
 
@@ -20,13 +22,10 @@ var helpers = {
         return parameters;
     },
     date: function (date, options) {
-        const defaultDateFormat = 'YYYY-MM-DD';
-        let parsedDate = moment(date, moment.ISO_8601);
-        return parsedDate.format(options.hash.format || defaultDateFormat);
-        //DD-MM-YYYY HH:mm
+        return moment(date, options.hash.parse || moment.ISO_8601).format(options.hash.format || defaultDateFormat);
     },
     ago: function (date) {
-        return moment(date, moment.ISO_8601).fromNow();
+        return moment(date, options.hash.parse || moment.ISO_8601).fromNow();
     }
 };
 

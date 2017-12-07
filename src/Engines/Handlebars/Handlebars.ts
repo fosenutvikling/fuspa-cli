@@ -1,7 +1,7 @@
 import { iEngine } from '../iEngine';
 import { Helpers } from './Helpers';
 import { envSlash } from '../../Functions';
-import { homeIndexPage, headerPartial } from './PagesHbs';
+import { homeIndexPage, headerPartial, greetingPage } from './PagesHbs';
 
 export class Handlebars implements iEngine {
     private handlebarsBin = './node_modules/.bin/handlebars ';
@@ -44,7 +44,7 @@ require('./hbsHelpers.ts')(Handlebars);`;
                 ' --extension hbs --output ' +
                 this.outputFolder + '/' +
                 this.partialOutput +
-                ' --commonjs handlebars/runtime --map',
+                ' --commonjs handlebars/runtime --map -p',
 
             'spa:engine': 'npm run spa:engine:templates && npm run spa:engine:partials'
         };
@@ -60,7 +60,11 @@ require('./hbsHelpers.ts')(Handlebars);`;
             textContent: homeIndexPage
         },
         {
-            filename: this.sourceFolder + envSlash() + this.partialFolder + envSlash() + 'footer.hbs',
+            filename: this.sourceFolder + envSlash() + this.templateFolder + envSlash() + 'greeting.hbs',
+            textContent: greetingPage
+        },
+        {
+            filename: this.sourceFolder + envSlash() + this.partialFolder + envSlash() + 'header.hbs',
             textContent: headerPartial
         }
     ];
