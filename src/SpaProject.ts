@@ -1,5 +1,6 @@
 import { ProjectFiles, IConfig } from './ProjectFiles';
 import { envSlash } from './Functions';
+require('source-map-support').install();
 
 export class SpaProject {
     private projectFiles: ProjectFiles;
